@@ -23,3 +23,73 @@ body:before{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;opa
 @media(max-width:700px){:root{--rail:0px}.side-rail{position:relative;width:100%;height:auto;inset:auto;display:block;padding:0}.brand-mark{height:85px;flex-direction:row;gap:12px}.brand-mark>span{font-size:40px}.brand-mark small{display:none}.rail-nav{display:flex;overflow-x:auto;padding:0;border-bottom:1px solid #63344f}.rail-nav a{flex:0 0 auto;padding:0 12px;height:42px;font-size:8px}.rail-social,.rail-quote,.dream-toggle{display:none}.site-main{margin-left:0}.hero-dream{min-height:600px;height:82vh}.hero-content h1{font-size:clamp(65px,17vw,115px)}.hero-stamp{width:82px;height:82px;right:6%;bottom:14%}.hero-stamp b{font-size:18px}.hero-side-note{display:none}.discipline-grid{grid-template-columns:1fr}.discipline-panel{min-height:370px}.panel-stats small{font-size:5px}.archive-board{padding:55px 13px}.archive-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.archive-image{height:135px}.archive-copy{padding:12px}.archive-copy h3{font-size:21px}.manifesto{grid-template-columns:1fr;padding:28px 20px}.manifesto-values{gap:8px}.manifesto-brand{justify-self:start}.site-footer{line-height:1.8}.header{padding:10px 15px}.menu{display:block}.nav{display:none;position:absolute;top:100%;left:0;right:0;padding:12px 20px 20px;background:#100812;flex-direction:column;gap:0;border-bottom:1px solid #63344f}.nav.open{display:flex}.nav a{padding:13px 0}.pagehero{min-height:410px;padding:40px 22px}.pagehero h1{font-size:clamp(43px,12vw,70px)}.wrap{width:calc(100% - 30px)}.content{padding-block:55px;gap:30px}.routes,.bottomlinks{grid-template-columns:1fr}.route{min-height:210px}.route>img{min-height:210px}.career-intro,.caseintro{grid-template-columns:1fr;padding-block:50px;gap:25px}.career-img{height:260px}.casegrid{grid-template-columns:1fr}.caseimg img{height:220px}.method>div{grid-template-columns:1fr}.skill-inner{grid-template-columns:1fr}.visual-interlude{grid-template-columns:1fr;margin-bottom:50px}.visual-interlude-image img{height:220px}.footer{flex-direction:column;align-items:flex-start}}
 @media(max-width:390px){.archive-cards{grid-template-columns:1fr}.archive-image{height:170px}.hero-subtitle{font-size:10px}.panel-stats b{font-size:23px}.panel-stats small{font-size:5px;letter-spacing:.3px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none;filter:none}}
+
+
+/* =========================================
+   NOCTURNA — BOTÓN MUSICAL FLOTANTE
+========================================= */
+.nocturna-music {
+  position: fixed;
+  right: 28px;
+  bottom: 25px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.nocturna-player-host {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: -10000px;
+  top: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nocturna-player-host iframe {
+  width: 200px;
+  height: 200px;
+  border: 0;
+}
+
+.music-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 19px;
+  border: 1px solid rgba(224, 173, 222, .55);
+  border-radius: 50px;
+  background: rgba(18, 10, 25, .94);
+  color: #f5dff5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(191, 111, 190, .12);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.music-button:hover,
+.music-button:focus-visible {
+  transform: translateY(-3px);
+  border-color: #edb7e8;
+  box-shadow: 0 0 25px rgba(222, 151, 219, .3);
+  outline: none;
+}
+
+.music-icon {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border: 1px solid rgba(224, 173, 222, .5);
+  border-radius: 50%;
+  color: #edb7e8;
+  font-size: 18px;
+}
