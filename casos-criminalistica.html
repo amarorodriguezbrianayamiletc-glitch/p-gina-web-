@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#09050d">
+    <meta name="color-scheme" content="dark">
+
+    <title>Casos criminales | Nocturna</title>
+
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap"
+        rel="stylesheet"
+    >
+
+   
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="reading-progress" aria-hidden="true"></div>
+
+    <a class="skip-link" href="#top">
+        Saltar al contenido
+    </a>
+
+    <!-- Encabezado -->
+    <header class="header">
+
+        <a class="logo" href="index.html">
+            <span>N</span>
+            <b>
+                NOCTURNA
+                <small>ARCHIVO DE CIENCIA Y MISTERIO</small>
+            </b>
+        </a>
+
+        <button
+            class="menu"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+        <nav class="nav">
+            <a href="index.html">Inicio</a>
+            <a href="criminologia.html">Criminología</a>
+            <a href="criminalistica.html">Criminalística</a>
+        </nav>
+
+    </header>
+
+    <main id="top">
+
+        <!-- Presentación -->
+        <section
+            class="pagehero"
+            style="--photo:url('https://th.bing.com/th/id/R.766d4a64a4c56830feb72121ae6f4c27?rik=uVNuTxLfq%2ft03A&pid=ImgRaw&r=0')"
+        >
+
+            <div class="pagehero-inner reveal">
+
+                <p class="eyebrow">
+                    ✳ CRIMINALÍSTICA / ARCHIVO DE CASOS
+                </p>
+
+                <h1>
+                    Casos y <em>evidencia.</em>
+                </h1>
+
+                <p>
+                    Casos conocidos y ejercicios educativos para estudiar el
+                    papel de Criminalística y distinguir hechos de hipótesis.
+                </p>
+
+                <div class="crumb">
+                    <a href="index.html">Inicio</a>
+                    ✳
+                    <a href="criminalistica.html">Criminalística</a>
+                    ✳ Casos
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Introducción -->
+        <section class="wrap caseintro">
+
+            <div class="intro reveal">
+
+                <p class="eyebrow">
+                    01 / LECTURA CRÍTICA
+                </p>
+
+                <h2>
+                    Un caso no es solo<br>
+                    <em>una historia.</em>
+                </h2>
+
+                <p>
+                    Para estudiarlo hay que distinguir hechos comprobados,
+                    hipótesis, testimonios y conclusiones. Las imágenes son
+                    ilustrativas y no representan escenas reales.
+                </p>
+
+            </div>
+
+            <aside class="warning reveal">
+
+                <span>✧</span>
+
+                <p>
+                    <b>Nota de contexto</b>
+                    Esta sección tiene fines educativos. Consulta fuentes
+                    judiciales, académicas o periodísticas confiables y evita
+                    sacar conclusiones sobre personas con información
+                    incompleta.
+                </p>
+
+            </aside>
+
+        </section>
+
+        
+        <section class="wrap casecollection">
+
+            <p class="eyebrow">
+                02 / CASOS PARA ESTUDIAR
+            </p>
+
+            <h2>
+                Observar antes de <em>concluir.</em>
+            </h2>
+
+            <div class="casegrid">
+
+                
+                <article class="case reveal">
+
+                    <div class="caseimg">
+
+                        <img
+                            src="data:image/webp;base64,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"
+                            alt="Imagen ilustrativa del caso El caso de Colin Pitchfork"
+                            loading="lazy"
+                        >
+
+                        <span>CASO 01</span>
+
+                    </div>
+
+                    <div class="casebody">
+
+                        <small>
+                            CASO DOCUMENTADO · HISTORIA FORENSE
+                        </small>
+
+                        <h3>
+                            EL CASO DE JOHN WAYNE GACY
+                        </h3>
+
+                        <p>
+                           John Wayne Gacy (1942-1994), conocido como el «Payaso Asesino», fue un asesino en serie estadounidense responsable de la muerte de 33 jóvenes y adolescentes entre 1972 y 1978, en Illinois, Estados Unidos.
+
+Biografía y vida pública:
+Trabajó como contratista de construcción y participaba activamente en su comunidad. También se disfrazaba de payaso, bajo el nombre de «Pogo», para entretener en fiestas y eventos. Esta imagen pública contrastaba con los delitos que cometía en secreto.
+
+Antecedentes y crímenes:
+En 1968 fue condenado por un delito sexual contra un adolescente y salió en libertad condicional en 1970. Posteriormente, atrajo a jóvenes mediante promesas de empleo, dinero u otras ofertas, y los asesinó. Enterró a muchas de sus víctimas en su propiedad y abandonó otras en el río Des Plaines.
+
+Captura y condena:
+En diciembre de 1978, la desaparición de Robert Piest, de 15 años, condujo a la investigación de Gacy. Durante un registro de su vivienda, las autoridades encontraron restos humanos. En 1980 fue declarado culpable de los 33 asesinatos y condenado a muerte.
+
+Ejecución y legado:
+Gacy fue ejecutado mediante inyección letal el 10 de mayo de 1994, a los 52 años. Su caso destacó por la cantidad de víctimas, la diferencia entre su imagen pública y sus crímenes, y la complejidad de identificar a todas las personas afectadas. Los análisis de ADN realizados años después ayudaron a identificar a algunas víctimas que habían permanecido sin nombre durante décadas.
+                        </p>
+
+                        <div class="focus">
+
+                            <b>IMPACTO:</b>
+
+                            <p>
+
+El caso de John Wayne Gacy tuvo un gran impacto en la sociedad y en las investigaciones criminales debido al número de víctimas y a la dificultad para descubrir sus delitos. Demostró que una apariencia respetable y una vida social activa no garantizan que una persona sea inofensiva. Además, evidenció la importancia de investigar las desapariciones, analizar las pruebas físicas y mejorar los métodos de identificación de víctimas. Con el avance de la tecnología forense, algunas víctimas pudieron ser identificadas décadas después, destacando la relevancia del ADN en la resolución de casos criminales.
+                            </p>
+
+                        </div>
+
+                        <details>
+
+                            <summary>
+                                Preguntas para reflexionar
+                                <b>＋</b>
+                            </summary>
+
+                            <ul>
+                                <li>
+                                    ¿Por qué es importante preservar la muestra?
+                                </li>
+
+                                <li>
+                                    ¿Qué documentación permite revisar el procedimiento?
+                                </li>
+
+                                <li>
+                                    ¿Por qué una conclusión científica debe explicar sus límites?
+                                </li>
+                            </ul>
+
+                        </details>
+
+                    </div>
+
+                </article>
+
+                <!-- Caso 02 -->
+                <article class="case reveal">
+
+                    <div class="caseimg">
+
+                        <img
+                            src="https://tse2.mm.bing.net/th/id/OIP.H7MEm4LdUCorTq0zZ2l3awAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                            alt="Imagen ilustrativa del caso La identificación mediante ADN"
+                            loading="lazy"
+                        >
+
+                        <span>CASO 02</span>
+
+                    </div>
+
+                    <div class="casebody">
+
+                        <small>
+                            CASO DOCUMENTADO · EVIDENCIA
+                        </small>
+
+                        <h3>
+                            CASO DE LOS HERMANOS MENÉNDEZ 
+                        </h3>
+
+                        <p>
+                            El 20 de agosto de 1989, Lyle Menéndez (21 años) y Erik Menéndez (18 años) mataron a tiros a sus padres, José y Kitty Menéndez, en su mansión de Beverly Hills (California). Usaron escopetas y dispararon múltiples veces (José recibió varios tiros, Kitty más de nueve, incluido uno final en la cara).Llamaron al 911 y dijeron que alguien había matado a sus padres. Durante meses gastaron grandes sumas de dinero de la herencia. Fueron detenidos en marzo de 1990 después de que Erik confesara el crimen a su psicólogo.Los dos juicios
+Primer juicio (1993): Los hermanos admitieron los asesinatos, pero alegaron defensa propia por años de abuso sexual, físico y psicológico por parte de su padre. El juicio terminó en jurados divididos (sin veredicto).
+Segundo juicio (1995-1996): Se limitó la evidencia de abusos. Fueron declarados culpables de asesinato en primer grado y condenados a cadena perpetua sin posibilidad de libertad condicional.
+La fiscalía sostuvo que el móvil fue el dinero (la familia era multimillonaria). La defensa insistió en el abuso.Situación actualEn 2025 un juez redujo sus condenas a 50 años a cadena perpetua, lo que les permitió solicitar libertad condicional. Hasta ahora les ha sido denegada, pero pueden volver a intentarlo en el futuro.El caso volvió a hacerse famoso por series y documentales de Netflix y por nuevas denuncias de abusos de José Menéndez (incluyendo una de un exmiembro de Menudo).
+                        </p>
+
+                        <div class="focus">
+
+                            <b>IMPACTO:</b>
+
+                            <p>
+                                El caso de los hermanos Menéndez tuvo un enorme impacto mediático y cultural en los años 90: se convirtió en uno de los juicios más televisados y seguidos de Estados Unidos, abrió un intenso debate público sobre el abuso sexual infantil, la defensa propia y la influencia del dinero en la justicia, y marcó un antes y un después en la cobertura de crímenes reales. Décadas después sigue generando controversia y renovado interés gracias a series y documentales, manteniendo viva la discusión sobre si los hermanos fueron asesinos por avaricia o víctimas de un trauma familiar extremo.
+                            </p>
+
+                        </div>
+
+                        <details>
+
+                            <summary>
+                                Preguntas para reflexionar
+                                <b>＋</b>
+                            </summary>
+
+                            <ul>
+                                <li>
+                                    ¿Qué factores pueden afectar una muestra?
+                                </li>
+
+                                <li>
+                                    ¿Qué demuestra una comparación y qué no?
+                                </li>
+
+                                <li>
+                                    ¿Por qué es útil una revisión independiente?
+                                </li>
+                            </ul>
+
+                        </details>
+
+                    </div>
+
+                </article>
+
+                <!-- Caso 03 -->
+                <article class="case reveal">
+
+                    <div class="caseimg">
+
+                        <img
+                            src="https://s.yimg.com/ny/api/res/1.2/VOeZPz4MUyQeIRHUj2EpBg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyNDI7aD04Mjg-/https://media.zenfs.com/en/aol_people_articles_471/46a34009c1782b3e2c0df90b94709a0b"
+                            alt="Imagen ilustrativa del caso El indicio mal documentado"
+                            loading="lazy"
+                        >
+
+                        <span>CASO 03</span>
+
+                    </div>
+
+                    <div class="casebody">
+
+                        <small>
+                            INFORMATIVO 
+                        </small>
+
+                        <h3>
+                            EL CASO DE AILEEN WUORNOS
+                        </h3>
+
+                        <p>
+                            Aileen Carol Wuornos (29 de febrero de 1956 – 9 de octubre de 2002) fue una asesina en serie estadounidense que mató a siete hombres en Florida entre 1989 y 1990. Es una de las pocas mujeres condenadas como asesina en serie en Estados Unidos y se hizo mundialmente conocida por su historia de abuso, prostitución y violencia.Vida temprana: Nació en Michigan. Su infancia fue extremadamente traumática: su padre estaba en prisión y se suicidó, su madre la abandonó y fue criada por sus abuelos. Sufrió abusos sexuales y físicos desde muy pequeña. A los 14 años quedó embarazada (dio al niño en adopción) y fue expulsada de casa. Vivió en la calle, se dedicó a la prostitución desde adolescente y tuvo una vida marcada por la pobreza, la violencia y problemas de salud mental.Los crímenes:Entre noviembre de 1989 y noviembre de 1990, Wuornos mató a siete hombres en Florida, a los que conocía mientras trabajaba como prostituta en las carreteras. Según su versión, todos intentaron violarla o la agredieron sexualmente, por lo que alegó defensa propia. Usaba una pistola .22 y luego robaba el coche y las pertenencias de las víctimas.Las víctimas confirmadas fueron:
+Richard Mallory
+David Spears
+Charles Carskaddon
+Peter Siems (su cuerpo nunca se encontró)
+Troy Burress
+Charles “Dick” Humphreys
+Walter Antonio
+Captura: Fue detenida el 9 de enero de 1991 en un bar de Port Orange, Florida. Su entonces pareja, Tyria Moore, colaboró con la policía y la convenció de entregarse. Wuornos confesó los asesinatos, aunque siempre mantuvo que actuó en defensa propia.Juicio y condena:En 1992 fue juzgada solo por el asesinato de Richard Mallory. El jurado no creyó su versión de defensa propia y la condenó a muerte. Posteriormente se declaró culpable o no se opuso a los cargos de los otros cinco asesinatos, recibiendo varias sentencias de muerte adicionales. Pasó más de 10 años en el corredor de la muerte.Ejecución: Fue ejecutada por inyección letal el 9 de octubre de 2002 en la prisión estatal de Florida, a los 46 años. Sus últimas palabras fueron confusas y hablaban de regresar “como en Independence Day”.LegadoSu caso generó gran polémica sobre el abuso sexual, la prostitución, la salud mental y cómo se juzga de forma distinta a las mujeres que cometen violencia. Inspiró la película Monster (2003), por la que Charlize Theron ganó un Óscar, además de varios documentales.
+                        </p>
+
+                        <div class="focus">
+
+                            <b>IMPACTO:</b>
+
+                            <p>El caso de Aileen Wuornos tuvo un fuerte impacto mediático y cultural al ser presentada como “la primera asesina en serie mujer” de Estados Unidos, generando un intenso debate sobre género, prostitución, abuso sexual y la legitimidad de la defensa propia. Su historia inspiró la película Monster (2003), que le valió un Óscar a Charlize Theron, además de documentales y series que la convirtieron en un icono complejo: para unos una monstruo, para otros una víctima de una sociedad violenta y misógina, manteniendo viva la discusión sobre cómo se juzga de forma distinta la violencia cometida por mujeres.
+                            </p>
+
+                        </div>
+
+                        <details>
+
+                            <summary>
+                                Preguntas para reflexionar
+                                <b>＋</b>
+                            </summary>
+
+                            <ul>
+                                <li>
+                                    ¿Qué datos deberían registrarse?
+                                </li>
+
+                                <li>
+                                    ¿Qué dudas genera la falta de trazabilidad?
+                                </li>
+
+                                <li>
+                                    ¿Cómo se explicarían las limitaciones en un informe?
+                                </li>
+                            </ul>
+
+                        </details>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        
+        <section class="wrap method">
+
+            <p class="eyebrow">
+                03 / MÉTODO DE LECTURA
+            </p>
+
+            <div>
+
+                <article>
+
+                    <span>01</span>
+
+                    <b>Verifica la fuente</b>
+
+                    <p>
+                        ¿Es oficial, académica o periodística confiable?
+                    </p>
+
+                </article>
+
+                <article>
+
+                    <span>02</span>
+
+                    <b>Separa los datos</b>
+
+                    <p>
+                        ¿Qué se sabe y qué sigue siendo una hipótesis?
+                    </p>
+
+                </article>
+
+                <article>
+
+                    <span>03</span>
+
+                    <b>Reconoce límites</b>
+
+                    <p>
+                        ¿Qué no puede afirmarse con la información disponible?
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        
+        <section class="wrap bottomlinks">
+
+            <a href="criminalistica.html">
+
+                <small>
+                    ← VOLVER A LA DISCIPLINA
+                </small>
+
+                <b>
+                    Criminalística
+                </b>
+
+            </a>
+
+            <a href="carrera-criminalistica.html">
+
+                <small>
+                    SEGUIR EXPLORANDO ↗
+                </small>
+
+                <b>
+                    Ver carrera y trabajo
+                </b>
+
+            </a>
+
+        </section>
+
+        
+        <section class="visual-interlude wrap reveal">
+
+            <div class="visual-interlude-copy">
+
+                <p class="eyebrow">
+                    NOCTURNA / MIRADA CRÍTICA
+                </p>
+
+                <h2>
+                    Cada indicio cuenta,<br>
+                    <em>cada verdad importa.</em>
+                </h2>
+
+                <p>
+                    Investigar exige observar con atención, contrastar la
+                    información y reconocer los límites de cada evidencia.
+                </p>
+
+            </div>
+
+            <div class="visual-interlude-image">
+
+                <img
+                    src="https://th.bing.com/th/id/R.cd1c300e6923707f8fc1279e472620d2?rik=cYGto%2fMLzzGWPg&pid=ImgRaw&r=0"
+                    alt="Imagen editorial relacionada con investigación"
+                    loading="lazy"
+                >
+
+                <span>
+                    OBSERVAR · ANALIZAR · COMPRENDER
+                </span>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+
+        <a class="logo" href="index.html">
+
+            <span>N</span>
+
+            <b>
+                NOCTURNA
+                <small>PROYECTO EDUCATIVO</small>
+            </b>
+
+        </a>
+
+        <p>
+            Curiosidad, evidencia y pensamiento crítico.
+        </p>
+
+        <a href="#top">
+            Volver arriba ↑
+        </a>
+
+    </footer>
+
+</body>
+
+</html>
