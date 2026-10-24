@@ -25,71 +25,14 @@ body:before{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;opa
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none;filter:none}}
 
 
-/* =========================================
-   NOCTURNA — BOTÓN MUSICAL FLOTANTE
-========================================= */
-.nocturna-music {
-  position: fixed;
-  right: 28px;
-  bottom: 25px;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-}
-
-.nocturna-player-host {
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  left: -10000px;
-  top: 0;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.nocturna-player-host iframe {
-  width: 200px;
-  height: 200px;
-  border: 0;
-}
-
-.music-button {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 13px 19px;
-  border: 1px solid rgba(224, 173, 222, .55);
-  border-radius: 50px;
-  background: rgba(18, 10, 25, .94);
-  color: #f5dff5;
-  font-family: "DM Sans", sans-serif;
-  font-size: 10px;
-  letter-spacing: 2px;
-  cursor: pointer;
-  backdrop-filter: blur(15px);
-  box-shadow: 0 0 25px rgba(191, 111, 190, .12);
-  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
-}
-
-.music-button:hover,
-.music-button:focus-visible {
-  transform: translateY(-3px);
-  border-color: #edb7e8;
-  box-shadow: 0 0 25px rgba(222, 151, 219, .3);
-  outline: none;
-}
-
-.music-icon {
-  display: grid;
-  place-items: center;
-  width: 27px;
-  height: 27px;
-  flex: 0 0 27px;
-  border: 1px solid rgba(224, 173, 222, .5);
-  border-radius: 50%;
-  color: #edb7e8;
-  font-size: 18px;
-}
+/* NOCTURNA — botón flotante de música */
+.nocturna-music{position:fixed;right:22px;bottom:22px;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:var(--sans,Arial,sans-serif)}
+.nocturna-music__player{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;right:0;bottom:0}
+.nocturna-music__player iframe{width:200px;height:200px}
+.nocturna-music__button{display:flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid #ff80c5aa;border-radius:999px;background:rgba(15,7,19,.9);color:#ffe7f5;box-shadow:0 0 22px #ff5fb733,inset 0 0 15px #ff5fb70d;backdrop-filter:blur(14px);font-size:9px;font-weight:700;letter-spacing:1.3px;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s}
+.nocturna-music__button:hover{transform:translateY(-3px);border-color:#ffa1d5;box-shadow:0 0 28px #ff5fb766}
+.nocturna-music__icon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#ff5fb722;color:#ffa1d5;font-size:17px}
+.nocturna-music.is-playing .nocturna-music__icon{animation:nocturna-note 1.3s ease-in-out infinite}
+.nocturna-music__caption{max-width:240px;padding:5px 9px;border-radius:7px;background:#100714cc;color:#d8b4cd;font-size:9px;letter-spacing:.6px;text-align:right}
+@keyframes nocturna-note{0%,100%{box-shadow:0 0 0 #ff5fb700;transform:scale(1)}50%{box-shadow:0 0 15px #ff5fb766;transform:scale(1.08)}}
+@media(max-width:600px){.nocturna-music{right:12px;bottom:12px}.nocturna-music__button{padding:10px 12px;font-size:8px}.nocturna-music__caption{max-width:190px;font-size:8px}}
