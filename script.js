@@ -1,260 +1,300 @@
 (() => {
- const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
- const progress = document.querySelector('.reading-progress');
- const nav = document.querySelector('.nav'), menu = document.querySelector('.menu');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const progress = document.querySelector('.reading-progress');
+  const nav = document.querySelector('.nav');
+  const menu = document.querySelector('.menu');
 
- const glow = document.createElement('div');
- glow.className = 'cursor-glow';
- glow.setAttribute('aria-hidden', 'true');
- document.body.appendChild(glow);
+  // Brillo del cursor
+  const glow = document.createElement('div');
+  glow.className = 'cursor-glow';
+  glow.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(glow);
 
- // MENÚ DE NAVEGACIÓN
- if (nav && menu) {
-   menu.addEventListener('click', () => {
-     const open = nav.classList.toggle('open');
-     menu.setAttribute('aria-expanded', String(open));
-     menu.textContent = open ? '✕' : '☰';
-   });
+  // Menú adaptable
+  if (nav && menu) {
+    menu.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      menu.setAttribute('aria-expanded', String(open));
+      menu.textContent = open ? '✕' : '☰';
+    });
 
-   nav.querySelectorAll('a').forEach(a => {
-     a.addEventListener('click', () => {
-       nav.classList.remove('open');
-       menu.setAttribute('aria-expanded', 'false');
-       menu.textContent = '☰';
-     });
-   });
- }
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        menu.setAttribute('aria-expanded', 'false');
+        menu.textContent = '☰';
+      });
+    });
+  }
 
- // MARCAR LA PÁGINA ACTUAL
- const current = location.pathname.split('/').pop() || 'index.html';
+  // Identificar página actual
+  const current = location.pathname.split('/').pop() || 'index.html';
 
- document.querySelectorAll('.nav a').forEach(a => {
-   if (a.getAttribute('href') === current) {
-     a.classList.add('active');
-   }
- });
+  document.querySelectorAll('.nav a').forEach(a => {
+    if (a.getAttribute('href') === current) {
+      a.classList.add('active');
+    }
+  });
 
- // ANIMACIONES AL DESPLAZARSE
- if ('IntersectionObserver' in window && !reduced) {
-   const io = new IntersectionObserver(entries => {
-     entries.forEach(e => {
-       if (e.isIntersecting) {
-         e.target.classList.add('visible');
-         io.unobserve(e.target);
-       }
-     });
-   }, {
-     threshold: 0.12,
-     rootMargin: '0px 0px -30px 0px'
-   });
+  // Animaciones al aparecer elementos
+  if ('IntersectionObserver' in window && !reduced) {
+    const io = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -30px 0px'
+      }
+    );
 
-   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
- } else {
-   document.querySelectorAll('.reveal').forEach(el => {
-     el.classList.add('visible');
-   });
- }
+    document.querySelectorAll('.reveal').forEach(el => {
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => {
+      el.classList.add('visible');
+    });
+  }
 
- // BARRA DE PROGRESO
- const update = () => {
-   if (progress) {
-     const max = document.documentElement.scrollHeight - innerHeight;
-     progress.style.width = (max > 0 ? scrollY / max * 100 : 0) + '%';
-   }
- };
+  // Barra de progreso de lectura
+  const update = () => {
+    if (progress) {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width =
+        (max > 0 ? scrollY / max * 100 : 0) + '%';
+    }
+  };
 
- addEventListener('scroll', update, { passive: true });
- update();
+  addEventListener('scroll', update, { passive: true });
+  update();
 
- // EFECTO DEL CURSOR
- if (!reduced && matchMedia('(pointer:fine)').matches) {
-   let last = 0;
+  // Estela del cursor
+  if (!reduced && matchMedia('(pointer:fine)').matches) {
+    let last = 0;
 
-   addEventListener('pointermove', e => {
-     glow.style.left = e.clientX + 'px';
-     glow.style.top = e.clientY + 'px';
+    addEventListener(
+      'pointermove',
+      e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
 
-     if (performance.now() - last > 95) {
-       const dot = document.createElement('i');
-       dot.className = 'cursor-trail';
-       dot.style.left = e.clientX + 'px';
-       dot.style.top = e.clientY + 'px';
+        if (performance.now() - last > 95) {
+          const dot = document.createElement('i');
+          dot.className = 'cursor-trail';
+          dot.style.left = e.clientX + 'px';
+          dot.style.top = e.clientY + 'px';
 
-       document.body.appendChild(dot);
+          document.body.appendChild(dot);
 
-       setTimeout(() => dot.remove(), 700);
-       last = performance.now();
-     }
-   }, { passive: true });
- } else {
-   glow.style.display = 'none';
- }
+          setTimeout(() => dot.remove(), 700);
+          last = performance.now();
+        }
+      },
+      { passive: true }
+    );
+  } else {
+    glow.style.display = 'none';
+  }
 
- // INTERRUPTOR DREAMCORE
- const toggle = document.querySelector('.dream-toggle');
+  // Activar o desactivar el efecto Dream
+  const toggle = document.querySelector('.dream-toggle');
 
- if (toggle) {
-   toggle.addEventListener('click', () => {
-     const on = toggle.getAttribute('aria-pressed') !== 'true';
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const on = toggle.getAttribute('aria-pressed') !== 'true';
 
-     toggle.setAttribute('aria-pressed', String(on));
-     document.body.classList.toggle('dream-off', !on);
-   });
- }
+      toggle.setAttribute('aria-pressed', String(on));
+      document.body.classList.toggle('dream-off', !on);
+    });
+  }
 
- // DETECTAR IMÁGENES QUE NO CARGAN
- document.querySelectorAll('img').forEach(img => {
-   img.addEventListener('error', () => {
-     img.classList.add('image-unavailable');
-   }, { once: true });
- }
- );
+  // Detectar imágenes que no cargan
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener(
+      'error',
+      () => {
+        img.classList.add('image-unavailable');
+      },
+      { once: true }
+    );
+  });
 })();
 
-
-
+/* ==========================================
+   NOCTURNA — REPRODUCTOR MUSICAL POR PÁGINA
+   ========================================== */
 
 (() => {
-  const videoId = 'd_HlPboLRL8';
+  // Canción asignada a cada página
+  const songs = {
+    'index.html': {
+      id: 'd_HlPboLRL8',
+      title: 'Dreamcore'
+    },
 
-  // Evitar duplicar el reproductor.
-  if (document.getElementById('nocturnaMusic')) return;
+    'criminologia.html': {
+      id: 'V1Pl8CzNzCw',
+      title: 'Lovely — Billie Eilish & Khalid'
+    },
 
-  // CREAR EL BOTÓN FLOTANTE
-  const musicBox = document.createElement('div');
-  musicBox.className = 'nocturna-music';
-  musicBox.id = 'nocturnaMusic';
+    'criminalistica.html': {
+      id: 'HUHC9tYz8ik',
+      title: 'bury a friend — Billie Eilish'
+    },
 
-  musicBox.innerHTML = `
-    <div
-      class="nocturna-player-host"
-      id="nocturnaPlayerHost"
-      aria-hidden="true">
+    'casos-criminologia.html': {
+      id: 'GCdwKhTtNNw',
+      title: 'Sweater Weather — The Neighbourhood'
+    },
+
+    'casos-criminalistica.html': {
+      id: 'EgBJmlPo8Xw',
+      title: 'everything i wanted — Billie Eilish'
+    },
+
+    'carrera-criminologia.html': {
+      id: 'k4V3Mo61fJM',
+      title: 'Control — Halsey'
+    },
+
+    'carrera-criminalistica.html': {
+      id: 'aGCdLKXNF3w',
+      title: 'Everybody Wants to Rule the World — Tears for Fears'
+    }
+  };
+
+  // Detectar en qué página estamos
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const selected = songs[page] || songs['index.html'];
+
+  let player = null;
+  let ready = false;
+  let playing = false;
+
+  // Crear el reproductor
+  const widget = document.createElement('div');
+  widget.className = 'nocturna-music';
+
+  widget.innerHTML = `
+    <div class="nocturna-music__player" aria-hidden="true">
+      <div id="nocturna-youtube-player"></div>
     </div>
 
     <button
-      class="music-button"
-      id="musicToggle"
+      class="nocturna-music__button"
       type="button"
       aria-label="Reproducir música"
-      aria-pressed="false">
-
-      <span
-        class="music-icon"
-        id="musicIcon"
-        aria-hidden="true">♫</span>
-
-      <span class="music-label" id="musicLabel">
-        ACTIVAR AMBIENTE
-      </span>
+      aria-pressed="false"
+    >
+      <span class="nocturna-music__icon" aria-hidden="true">♫</span>
+      <span class="nocturna-music__text">REPRODUCIR MÚSICA</span>
     </button>
 
-    <span class="music-caption" id="musicCaption">
-      NOCTURNA · SOUNDTRACK
-    </span>
+    <span class="nocturna-music__caption"></span>
   `;
 
-  document.body.appendChild(musicBox);
+  document.body.appendChild(widget);
 
-  const musicButton = musicBox.querySelector('#musicToggle');
-  const musicIcon = musicBox.querySelector('#musicIcon');
-  const musicLabel = musicBox.querySelector('#musicLabel');
-  const musicCaption = musicBox.querySelector('#musicCaption');
+  const button = widget.querySelector('button');
+  const buttonText = widget.querySelector('.nocturna-music__text');
+  const caption = widget.querySelector('.nocturna-music__caption');
 
-  let player = null;
-  let apiReady = false;
-  let isPlaying = false;
+  caption.textContent = selected.title;
 
-  // ACTUALIZAR EL ESTADO DEL BOTÓN
-  function setMusicState(playing) {
-    isPlaying = playing;
+  // Actualizar el botón según el estado
+  function updateButton(isPlaying) {
+    playing = isPlaying;
 
-    musicBox.classList.toggle('is-playing', playing);
+    button.setAttribute('aria-pressed', String(isPlaying));
 
-    musicButton.setAttribute('aria-pressed', String(playing));
-
-    musicButton.setAttribute(
+    button.setAttribute(
       'aria-label',
-      playing ? 'Pausar música' : 'Reproducir música'
+      isPlaying ? 'Pausar música' : 'Reproducir música'
     );
 
-    musicIcon.textContent = playing ? 'Ⅱ' : '♫';
+    buttonText.textContent = isPlaying
+      ? 'PAUSAR MÚSICA'
+      : 'REPRODUCIR MÚSICA';
 
-    musicLabel.textContent = playing
-      ? 'PAUSAR AMBIENTE'
-      : 'ACTIVAR AMBIENTE';
-
-    musicCaption.textContent = playing
-      ? 'NOCTURNA · REPRODUCIENDO'
-      : 'NOCTURNA · SOUNDTRACK';
+    widget.classList.toggle('is-playing', isPlaying);
   }
 
-  // CREAR EL REPRODUCTOR DE YOUTUBE
-  function createPlayer() {
-    if (!window.YT || !window.YT.Player) return;
+  // Reproducir o pausar al pulsar el botón
+  button.addEventListener('click', () => {
+    if (!ready || !player) {
+      caption.textContent = 'CARGANDO MÚSICA…';
+      return;
+    }
 
-    player = new YT.Player('nocturnaPlayerHost', {
+    if (playing) {
+      player.pauseVideo();
+    } else {
+      player.unMute();
+      player.playVideo();
+    }
+  });
+
+  // Crear el reproductor de YouTube
+  function createPlayer() {
+    if (!window.YT || !window.YT.Player) {
+      return;
+    }
+
+    player = new YT.Player('nocturna-youtube-player', {
       width: '200',
       height: '200',
-      videoId: videoId,
+
+      videoId: selected.id,
 
       playerVars: {
         autoplay: 0,
         controls: 0,
         loop: 1,
-        playlist: videoId,
+        playlist: selected.id,
         playsinline: 1,
         rel: 0
       },
 
       events: {
-        onReady: function () {
-          apiReady = true;
-          musicLabel.textContent = 'ACTIVAR AMBIENTE';
+        onReady(event) {
+          ready = true;
+
+          event.target.setVolume(45);
+          caption.textContent = selected.title;
         },
 
-        onStateChange: function (event) {
+        onStateChange(event) {
           if (event.data === YT.PlayerState.PLAYING) {
-            setMusicState(true);
-          }
-
-          if (
+            updateButton(true);
+            caption.textContent = selected.title;
+          } else if (
             event.data === YT.PlayerState.PAUSED ||
             event.data === YT.PlayerState.ENDED
           ) {
-            setMusicState(false);
+            updateButton(false);
           }
         },
 
-        onError: function () {
-          musicLabel.textContent = 'VIDEO NO DISPONIBLE';
-          musicCaption.textContent = 'REVISA EL VIDEO DE YOUTUBE';
+        onError() {
+          caption.textContent = 'No se pudo cargar esta canción';
         }
       }
     });
   }
 
-  // BOTÓN PARA ACTIVAR O PAUSAR LA MÚSICA
-  musicButton.addEventListener('click', function () {
-    if (!apiReady || !player) {
-      musicLabel.textContent = 'CARGANDO MÚSICA...';
-      return;
-    }
-
-    if (isPlaying) {
-      player.pauseVideo();
-    } else {
-      player.playVideo();
-    }
-  });
-
-  // CARGAR LA API OFICIAL DE YOUTUBE
+  // Cargar la API de YouTube
   if (window.YT && window.YT.Player) {
     createPlayer();
   } else {
     const previousCallback = window.onYouTubeIframeAPIReady;
 
-    window.onYouTubeIframeAPIReady = function () {
+    window.onYouTubeIframeAPIReady = () => {
       if (typeof previousCallback === 'function') {
         previousCallback();
       }
@@ -267,11 +307,12 @@
         'script[src="https://www.youtube.com/iframe_api"]'
       )
     ) {
-      const apiScript = document.createElement('script');
+      const api = document.createElement('script');
 
-      apiScript.src = 'https://www.youtube.com/iframe_api';
+      api.src = 'https://www.youtube.com/iframe_api';
+      api.async = true;
 
-      document.head.appendChild(apiScript);
+      document.head.appendChild(api);
     }
   }
 })();
