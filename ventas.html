@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -742,76 +741,6 @@ footer b {
     }
 }
 
-/* =========================
-   REPRODUCTOR DEATH BED
-========================= */
-
-.music-player {
-    position: fixed;
-    right: 25px;
-    bottom: 82px;
-    z-index: 1001;
-    width: 240px;
-    padding: 8px;
-    background: #160e1a;
-    border: 1px solid #ff72bd70;
-    border-radius: 13px;
-    box-shadow: 0 8px 30px #00000070;
-}
-
-.music-player iframe {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: 0;
-    border-radius: 8px;
-}
-
-.music-button {
-    position: fixed;
-    right: 25px;
-    bottom: 25px;
-    z-index: 1002;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 21px;
-    border: 1px solid #ff72bd80;
-    border-radius: 50px;
-    background: #160e1a;
-    color: #ffa6d6;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    cursor: pointer;
-    box-shadow: 0 5px 25px #ff72bd30;
-    transition: .3s ease;
-}
-
-.music-button:hover {
-    background: #ff72bd;
-    color: #160b15;
-    transform: translateY(-3px);
-}
-
-.music-icon {
-    font-size: 17px;
-}
-
-@media(max-width: 600px) {
-
-    .music-player {
-        width: 190px;
-        right: 15px;
-        bottom: 75px;
-    }
-
-    .music-button {
-        right: 15px;
-        bottom: 15px;
-        padding: 12px 17px;
-    }
-}
-
 </style>
 </head>
 
@@ -1213,26 +1142,6 @@ footer b {
 
 </div>
 
-<!-- =========================
-     REPRODUCTOR DEATH BED
-========================= -->
-
-<div class="music-player">
-    <iframe
-        id="deathBedPlayer"
-        src="https://www.youtube.com/embed/jJPMnTXl63E?enablejsapi=1&controls=1&rel=0"
-        title="Death Bed - Powfu"
-        allow="autoplay; encrypted-media; picture-in-picture"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-    </iframe>
-</div>
-
-<button type="button" class="music-button" id="musicButton">
-    <span class="music-icon" id="musicIcon">♫</span>
-    <span id="musicText">Death Bed</span>
-</button>
-
 <script>
 
 /* =========================
@@ -1329,53 +1238,6 @@ document.addEventListener("keydown", event => {
 
     if (event.key === "Escape") {
         closeDetails();
-    }
-
-});
-
-/* =========================
-   CONTROL DEATH BED
-========================= */
-
-const musicButton = document.getElementById("musicButton");
-const musicIcon = document.getElementById("musicIcon");
-const musicText = document.getElementById("musicText");
-
-let isPlaying = false;
-
-function sendYouTubeCommand(command) {
-
-    const iframe = document.getElementById("deathBedPlayer");
-
-    iframe.contentWindow.postMessage(
-        JSON.stringify({
-            event: "command",
-            func: command,
-            args: []
-        }),
-        "https://www.youtube.com"
-    );
-
-}
-
-musicButton.addEventListener("click", function() {
-
-    if (!isPlaying) {
-
-        sendYouTubeCommand("playVideo");
-
-        musicIcon.textContent = "Ⅱ";
-        musicText.textContent = "Pausar";
-        isPlaying = true;
-
-    } else {
-
-        sendYouTubeCommand("pauseVideo");
-
-        musicIcon.textContent = "♫";
-        musicText.textContent = "Death Bed";
-        isPlaying = false;
-
     }
 
 });
