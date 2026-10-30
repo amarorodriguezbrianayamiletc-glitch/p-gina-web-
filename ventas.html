@@ -1,0 +1,1064 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#09050d">
+<title>Archivo de oportunidades | NOCTURNA</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+<style>
+:root{
+  --pink:#ff72bd;
+  --pink-light:#ffc0e2;
+  --purple:#ad85ff;
+  --dark:#09050d;
+  --panel:#160e1b;
+  --muted:#b5a5b8;
+  --line:rgba(255,255,255,.10);
+}
+
+*{box-sizing:border-box}
+
+body{
+  background:var(--dark);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+}
+
+a{text-decoration:none;color:inherit}
+
+.sales-page{
+  width:min(1250px,91%);
+  margin:auto;
+}
+
+.sales-hero{
+  min-height:490px;
+  display:flex;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+  padding:90px 7%;
+  margin:35px auto 90px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:
+    linear-gradient(90deg,rgba(9,5,13,.97),rgba(9,5,13,.78),rgba(9,5,13,.35)),
+    url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1800&q=85') center/cover;
+}
+
+.sales-hero::after{
+  content:"";
+  position:absolute;
+  width:350px;
+  height:350px;
+  right:-100px;
+  bottom:-180px;
+  border-radius:50%;
+  background:#ff5fb7;
+  filter:blur(130px);
+  opacity:.3;
+}
+
+.hero-content{
+  max-width:680px;
+  position:relative;
+  z-index:2;
+}
+
+.eyebrow{
+  color:var(--pink);
+  font-size:10px;
+  letter-spacing:4px;
+  font-weight:700;
+  margin-bottom:22px;
+}
+
+.sales-hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(55px,8vw,100px);
+  line-height:.88;
+  font-weight:500;
+  margin:0 0 28px;
+}
+
+.sales-hero h1 span,
+.section-title span{
+  color:var(--pink);
+  font-style:italic;
+}
+
+.sales-hero p{
+  max-width:530px;
+  color:#d2c5d5;
+  line-height:1.8;
+  font-size:14px;
+}
+
+.hero-label{
+  display:inline-block;
+  margin-top:25px;
+  padding:12px 18px;
+  border:1px solid rgba(255,114,189,.5);
+  color:var(--pink-light);
+  font-size:10px;
+  letter-spacing:2px;
+}
+
+.sales-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin:-45px 0 90px;
+  position:relative;
+  z-index:3;
+}
+
+.sales-nav a{
+  padding:13px 20px;
+  background:#1a1020;
+  border:1px solid var(--line);
+  font-size:10px;
+  letter-spacing:1.5px;
+  transition:.3s;
+}
+
+.sales-nav a:hover{
+  border-color:var(--pink);
+  color:var(--pink);
+  transform:translateY(-3px);
+}
+
+.catalog-section{
+  margin:100px 0;
+  scroll-margin-top:40px;
+}
+
+.section-top{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:35px;
+}
+
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(42px,6vw,68px);
+  font-weight:500;
+  margin:0;
+}
+
+.section-description{
+  max-width:420px;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.8;
+}
+
+.section-number{
+  color:var(--pink);
+  font-size:11px;
+  letter-spacing:3px;
+  margin-bottom:12px;
+}
+
+.catalog-line{
+  height:1px;
+  background:linear-gradient(90deg,var(--pink),transparent);
+  margin:25px 0 35px;
+}
+
+/* FILTROS */
+
+.catalog-tools{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-bottom:30px;
+}
+
+.filter-group{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.filter-btn{
+  background:transparent;
+  border:1px solid var(--line);
+  color:#cbbdce;
+  padding:10px 15px;
+  font-family:inherit;
+  font-size:10px;
+  letter-spacing:1px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+  background:var(--pink);
+  color:#160b16;
+  border-color:var(--pink);
+}
+
+.search-box{
+  background:#160e1b;
+  border:1px solid var(--line);
+  color:white;
+  padding:12px 15px;
+  outline:none;
+  width:220px;
+  font-family:inherit;
+  font-size:12px;
+}
+
+.search-box:focus{border-color:var(--pink)}
+
+/* TARJETAS */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.product-card{
+  background:linear-gradient(145deg,#1c1222,#100a14);
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:.35s;
+  position:relative;
+}
+
+.product-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,114,189,.55);
+  box-shadow:0 20px 55px rgba(0,0,0,.3);
+}
+
+.product-image{
+  height:210px;
+  position:relative;
+  overflow:hidden;
+  background:#211426;
+}
+
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:.6s;
+}
+
+.product-card:hover .product-image img{
+  transform:scale(1.07);
+}
+
+.product-tag{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:rgba(10,5,15,.85);
+  color:var(--pink-light);
+  padding:8px 11px;
+  font-size:9px;
+  letter-spacing:1.5px;
+  border:1px solid rgba(255,114,189,.3);
+}
+
+.product-body{padding:23px}
+
+.product-category{
+  color:var(--pink);
+  font-size:9px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+
+.product-body h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:29px;
+  font-weight:600;
+  line-height:1.05;
+  margin:0 0 12px;
+}
+
+.product-description{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+  min-height:65px;
+}
+
+.product-specs{
+  list-style:none;
+  padding:15px 0;
+  margin:15px 0;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+
+.product-specs li{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  font-size:10px;
+  padding:7px 0;
+  color:#c6b9c9;
+}
+
+.product-specs strong{
+  color:#fff;
+  text-align:right;
+  font-weight:600;
+}
+
+.product-bottom{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.product-price small{
+  display:block;
+  color:#a99aac;
+  font-size:9px;
+  letter-spacing:1px;
+  margin-bottom:5px;
+}
+
+.product-price strong{
+  color:var(--pink-light);
+  font-size:25px;
+  font-family:'Cormorant Garamond',serif;
+}
+
+.product-action{
+  display:inline-block;
+  padding:12px 14px;
+  background:var(--pink);
+  color:#160b16;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:1px;
+  transition:.3s;
+}
+
+.product-action:hover{
+  background:white;
+  transform:translateY(-2px);
+}
+
+/* BANNER */
+
+.promo-banner{
+  padding:50px;
+  margin:90px 0;
+  background:
+    linear-gradient(90deg,rgba(13,7,17,.95),rgba(13,7,17,.65)),
+    url('https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=1600&q=85') center/cover;
+  border:1px solid rgba(255,114,189,.3);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+}
+
+.promo-banner h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:45px;
+  font-weight:500;
+  margin:10px 0;
+}
+
+.promo-banner h2 span{color:var(--pink)}
+
+.promo-banner p{
+  color:#c7b9ca;
+  font-size:12px;
+  line-height:1.8;
+  max-width:520px;
+}
+
+/* EMPLEOS */
+
+.job-card{
+  background:#160e1b;
+  border:1px solid var(--line);
+  margin-bottom:16px;
+  padding:25px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px;
+  transition:.3s;
+}
+
+.job-card:hover{
+  border-color:var(--pink);
+  transform:translateX(5px);
+}
+
+.job-company{
+  color:var(--pink);
+  font-size:9px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+
+.job-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;
+  margin:0 0 10px;
+}
+
+.job-info{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 20px;
+  color:#bbaec0;
+  font-size:10px;
+  margin-bottom:18px;
+}
+
+.job-description{
+  color:#c9bdcc;
+  font-size:12px;
+  line-height:1.8;
+  max-width:750px;
+}
+
+.job-requirements{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:15px;
+}
+
+.job-requirements span{
+  border:1px solid var(--line);
+  padding:7px 10px;
+  color:#cdbdce;
+  font-size:9px;
+}
+
+.job-salary{
+  text-align:right;
+  min-width:145px;
+  align-self:center;
+}
+
+.job-salary small{
+  display:block;
+  color:#a99aac;
+  font-size:9px;
+  letter-spacing:1px;
+}
+
+.job-salary strong{
+  display:block;
+  font-family:'Cormorant Garamond',serif;
+  color:var(--pink-light);
+  font-size:30px;
+  margin:7px 0 15px;
+}
+
+.job-salary a{
+  display:inline-block;
+  border:1px solid var(--pink);
+  padding:10px 13px;
+  color:var(--pink);
+  font-size:9px;
+  letter-spacing:1px;
+}
+
+.job-note{
+  border-left:2px solid var(--pink);
+  padding:15px 20px;
+  color:#b9aabd;
+  font-size:11px;
+  line-height:1.8;
+  margin-top:25px;
+  background:rgba(255,114,189,.04);
+}
+
+/* CIERRE */
+
+.sales-closing{
+  text-align:center;
+  padding:100px 20px;
+  border-top:1px solid var(--line);
+  margin-top:100px;
+}
+
+.sales-closing h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(42px,6vw,70px);
+  font-weight:500;
+  margin:15px 0;
+}
+
+.sales-closing h2 span{color:var(--pink);font-style:italic}
+
+.sales-closing p{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.8;
+}
+
+.back-home{
+  display:inline-block;
+  margin-top:25px;
+  border:1px solid var(--pink);
+  color:var(--pink-light);
+  padding:14px 22px;
+  font-size:10px;
+  letter-spacing:2px;
+  transition:.3s;
+}
+
+.back-home:hover{
+  background:var(--pink);
+  color:#160b16;
+}
+
+.sales-footer{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:25px 4%;
+  border-top:1px solid var(--line);
+  color:#99899e;
+  font-size:9px;
+  letter-spacing:2px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+  .product-grid{grid-template-columns:repeat(2,1fr)}
+  .section-top{align-items:start;flex-direction:column}
+}
+
+@media(max-width:600px){
+  .sales-hero{padding:65px 25px;min-height:420px}
+  .sales-nav{margin-bottom:60px}
+  .product-grid{grid-template-columns:1fr}
+  .promo-banner{padding:30px;flex-direction:column;align-items:start}
+  .job-card{grid-template-columns:1fr}
+  .job-salary{text-align:left}
+  .sales-footer{flex-direction:column}
+  .search-box{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand">
+    <span class="brand-mark">N.</span>
+    <span>NOCTURNA</span>
+  </a>
+
+  <nav class="main-nav">
+    <a href="index.html">Inicio</a>
+    <a href="criminologia.html">Criminología</a>
+    <a href="criminalistica.html">Criminalística</a>
+    <a href="ventas.html" class="active">Recursos</a>
+  </nav>
+</header>
+
+<main class="sales-page">
+
+  <!-- PORTADA -->
+
+  <section class="sales-hero">
+    <div class="hero-content">
+      <div class="eyebrow">NOCTURNA / ARCHIVO 03</div>
+
+      <h1>
+        Tu próximo paso<br>
+        <span>comienza aquí.</span>
+      </h1>
+
+      <p>
+        Explora cursos, materiales académicos y oportunidades
+        profesionales relacionadas con la criminología,
+        criminalística y ciencias forenses.
+      </p>
+
+      <span class="hero-label">CONOCIMIENTO · FORMACIÓN · FUTURO</span>
+    </div>
+  </section>
+
+  <!-- NAVEGACIÓN -->
+
+  <nav class="sales-nav">
+    <a href="#cursos">01 / CURSOS</a>
+    <a href="#guias">02 / GUÍAS DE ESTUDIO</a>
+    <a href="#empleos">03 / BOLSA DE TRABAJO</a>
+  </nav>
+
+  <!-- CURSOS -->
+
+  <section class="catalog-section" id="cursos">
+
+    <div class="section-top">
+      <div>
+        <div class="section-number">01 — FORMACIÓN</div>
+        <h2 class="section-title">Cursos <span>especializados.</span></h2>
+      </div>
+
+      <p class="section-description">
+        Amplía tus conocimientos con programas de formación
+        relacionados con la investigación, el análisis y las
+        ciencias forenses.
+      </p>
+    </div>
+
+    <div class="catalog-line"></div>
+
+    <div class="catalog-tools">
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">TODOS</button>
+        <button class="filter-btn" data-filter="crimi">CRIMINOLOGÍA</button>
+        <button class="filter-btn" data-filter="forense">FORENSE</button>
+        <button class="filter-btn" data-filter="investigacion">INVESTIGACIÓN</button>
+      </div>
+
+      <input class="search-box" id="courseSearch" type="search"
+      placeholder="Buscar un curso...">
+    </div>
+
+    <div class="product-grid" id="courseGrid">
+
+      <article class="product-card" data-category="crimi">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=85" alt="Libros y material de estudio">
+          <span class="product-tag">MÁS POPULAR</span>
+        </div>
+
+        <div class="product-body">
+          <div class="product-category">CRIMINOLOGÍA</div>
+          <h3>Introducción a la criminología</h3>
+          <p class="product-description">
+            Conoce los fundamentos de la criminología, sus principales
+            teorías y el estudio de las conductas antisociales.
+          </p>
+
+          <ul class="product-specs">
+            <li><span>Duración</span><strong>20 horas</strong></li>
+            <li><span>Modalidad</span><strong>En línea</strong></li>
+            <li><span>Nivel</span><strong>Principiante</strong></li>
+            <li><span>Incluye</span><strong>Material digital</strong></li>
+          </ul>
+
+          <div class="product-bottom">
+            <div class="product-price">
+              <small>PRECIO DE EJEMPLO</small>
+              <strong>$499 MXN</strong>
+            </div>
+            <a href="#contacto" class="product-action">CONSULTAR ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="forense">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=900&q=85" alt="Laboratorio y equipo científico">
+          <span class="product-tag">CIENCIAS FORENSES</span>
+        </div>
+
+        <div class="product-body">
+          <div class="product-category">CRIMINALÍSTICA</div>
+          <h3>Fundamentos de ciencias forenses</h3>
+          <p class="product-description">
+            Introducción al trabajo pericial, las disciplinas forenses
+            y su importancia en la investigación.
+          </p>
+
+          <ul class="product-specs">
+            <li><span>Duración</span><strong>30 horas</strong></li>
+            <li><span>Modalidad</span><strong>En línea</strong></li>
+            <li><span>Nivel</span><strong>Intermedio</strong></li>
+            <li><span>Incluye</span><strong>Ejercicios y lecturas</strong></li>
+          </ul>
+
+          <div class="product-bottom">
+            <div class="product-price">
+              <small>PRECIO DE EJEMPLO</small>
+              <strong>$750 MXN</strong>
+            </div>
+            <a href="#contacto" class="product-action">CONSULTAR ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card" data-category="investigacion">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85" alt="Investigación y escritura">
+          <span class="product-tag">INVESTIGACIÓN</span>
+        </div>
+
+        <div class="product-body">
+          <div class="product-category">ANÁLISIS</div>
+          <h3>Análisis de la escena del crimen</h3>
+          <p class="product-description">
+            Estudia los principios de observación, documentación
+            y análisis de una escena desde una perspectiva académica.
+          </p>
+
+          <ul class="product-specs">
+            <li><span>Duración</span><strong>16 horas</strong></li>
+            <li><span>Modalidad</span><strong>En línea</strong></li>
+            <li><span>Nivel</span><strong>Intermedio</strong></li>
+            <li><span>Incluye</span><strong>Casos didácticos</strong></li>
+          </ul>
+
+          <div class="product-bottom">
+            <div class="product-price">
+              <small>PRECIO DE EJEMPLO</small>
+              <strong>$599 MXN</strong>
+            </div>
+            <a href="#contacto" class="product-action">CONSULTAR ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BANNER -->
+
+  <section class="promo-banner">
+    <div>
+      <div class="eyebrow">NOCTURNA / MATERIAL ACADÉMICO</div>
+      <h2>Aprender es una forma de <span>investigar.</span></h2>
+      <p>
+        Encuentra herramientas que te ayuden a comprender
+        conceptos, desarrollar habilidades y fortalecer tu formación.
+      </p>
+    </div>
+    <a href="#guias" class="product-action">VER GUÍAS ↗</a>
+  </section>
+
+  <!-- GUÍAS -->
+
+  <section class="catalog-section" id="guias">
+
+    <div class="section-top">
+      <div>
+        <div class="section-number">02 — BIBLIOTECA DIGITAL</div>
+        <h2 class="section-title">Guías de <span>estudio.</span></h2>
+      </div>
+
+      <p class="section-description">
+        Material de consulta diseñado para estudiantes que desean
+        reforzar sus conocimientos y organizar su aprendizaje.
+      </p>
+    </div>
+
+    <div class="catalog-line"></div>
+
+    <div class="product-grid">
+
+      <article class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=85" alt="Libros de criminología">
+          <span class="product-tag">GUÍA DIGITAL</span>
+        </div>
+
+        <div class="product-body">
+          <div class="product-category">CRIMINOLOGÍA</div>
+          <h3>Manual básico de criminología</h3>
+          <p class="product-description">
+            Guía introductoria para comprender los conceptos
+            esenciales de la criminología y sus principales enfoques.
+          </p>
+
+          <ul class="product-specs">
+            <li><span>Contenido</span><strong>8 unidades</strong></li>
+            <li><span>Extensión</span><strong>65 páginas</strong></li>
+            <li><span>Formato</span><strong>PDF descargable</strong></li>
+            <li><span>Incluye</span><strong>Glosario y actividades</strong></li>
+          </ul>
+
+          <div class="product-bottom">
+            <div class="product-price">
+              <small>PRECIO DE EJEMPLO</small>
+              <strong>$129 MXN</strong>
+            </div>
+            <a href="#contacto" class="product-action">CONSULTAR ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=900&q=85" alt="Libros de estudio">
+          <span class="product-tag">MATERIAL DIGITAL</span>
+        </div>
+
+        <div class="product-body">
+          <div class="product-category">CRIMINALÍSTICA</div>
+          <h3>Guía de criminalística general</h3>
+          <p class="product-description">
+            Recurso académico sobre indicios, evidencias,
+            metodología y disciplinas auxiliares.
+          </p>
+
+          <ul class="product-specs">
+            <li><span>Contenido</span><strong>10 unidades</strong></li>
+            <li><span>Extensión</span><strong>90 páginas</strong></li>
+            <li><span>Formato</span><strong>PDF descargable</strong></li>
+            <li><span>Incluye</span><strong>Esquemas y ejercicios</strong></li>
+          </ul>
+
+          <div class="product-bottom">
+            <div class="product-price">
+              <small>PRECIO DE EJEMPLO</small>
+              <strong>$179 MXN</strong>
+            </div>
+            <a href="#contacto" class="product-action">CONSULTAR ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=900&q=85" alt="Cuaderno y apuntes">
+          <span class="product-tag">EDICIÓN DE ESTUDIO</span>
+        </div>
+
+        <div class="product-body">
+          <div class="product-category">CIENCIAS FORENSES</div>
+          <h3>Compendio de ciencias forenses</h3>
+          <p class="product-description">
+            Recopilación introductoria de áreas forenses,
+            conceptos y vocabulario técnico.
+          </p>
+
+          <ul class="product-specs">
+            <li><span>Contenido</span><strong>7 capítulos</strong></li>
+            <li><span>Extensión</span><strong>72 páginas</strong></li>
+            <li><span>Formato</span><strong>PDF descargable</strong></li>
+            <li><span>Incluye</span><strong>Tablas y glosario</strong></li>
+          </ul>
+
+          <div class="product-bottom">
+            <div class="product-price">
+              <small>PRECIO DE EJEMPLO</small>
+              <strong>$149 MXN</strong>
+            </div>
+            <a href="#contacto" class="product-action">CONSULTAR ↗</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- OFERTAS DE TRABAJO -->
+
+  <section class="catalog-section" id="empleos">
+
+    <div class="section-top">
+      <div>
+        <div class="section-number">03 — CAMPO LABORAL</div>
+        <h2 class="section-title">Bolsa de <span>trabajo.</span></h2>
+      </div>
+
+      <p class="section-description">
+        Explora ejemplos de puestos relacionados con las áreas
+        de criminología, criminalística y ciencias forenses.
+      </p>
+    </div>
+
+    <div class="catalog-line"></div>
+
+    <article class="job-card">
+      <div>
+        <div class="job-company">INSTITUCIÓN DE EJEMPLO · ÁREA DE PREVENCIÓN</div>
+        <h3>Auxiliar de prevención del delito</h3>
+
+        <div class="job-info">
+          <span>⌖ San Luis Potosí, S.L.P.</span>
+          <span>◷ Tiempo completo</span>
+          <span>⌘ Área: Criminología</span>
+        </div>
+
+        <p class="job-description">
+          Apoyo en actividades de prevención, elaboración de reportes,
+          organización de información y participación en programas
+          comunitarios de prevención del delito.
+        </p>
+
+        <div class="job-requirements">
+          <span>Licenciatura relacionada</span>
+          <span>Comunicación</span>
+          <span>Elaboración de reportes</span>
+          <span>Trabajo en equipo</span>
+        </div>
+      </div>
+
+      <div class="job-salary">
+        <small>SUELDO MENSUAL DE EJEMPLO</small>
+        <strong>$12,000</strong>
+        <a href="#contacto">VER DETALLES ↗</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div>
+        <div class="job-company">LABORATORIO DE EJEMPLO · ÁREA PERICIAL</div>
+        <h3>Auxiliar de laboratorio forense</h3>
+
+        <div class="job-info">
+          <span>⌖ Ciudad de México</span>
+          <span>◷ Tiempo completo</span>
+          <span>⌘ Área: Ciencias forenses</span>
+        </div>
+
+        <p class="job-description">
+          Colaboración en tareas administrativas y de apoyo técnico
+          dentro de un laboratorio, registro de información y
+          organización de documentación bajo supervisión profesional.
+        </p>
+
+        <div class="job-requirements">
+          <span>Formación afín</span>
+          <span>Atención al detalle</span>
+          <span>Organización</span>
+          <span>Conocimientos científicos</span>
+        </div>
+      </div>
+
+      <div class="job-salary">
+        <small>SUELDO MENSUAL DE EJEMPLO</small>
+        <strong>$14,500</strong>
+        <a href="#contacto">VER DETALLES ↗</a>
+      </div>
+    </article>
+
+    <article class="job-card">
+      <div>
+        <div class="job-company">CONSULTORÍA DE EJEMPLO · INVESTIGACIÓN</div>
+        <h3>Analista de investigación</h3>
+
+        <div class="job-info">
+          <span>⌖ Guadalajara, Jalisco</span>
+          <span>◷ Tiempo completo</span>
+          <span>⌘ Área: Análisis</span>
+        </div>
+
+        <p class="job-description">
+          Recopilación y análisis de información, elaboración
+          de documentos técnicos, consulta de bases de datos
+          y apoyo en proyectos de investigación.
+        </p>
+
+        <div class="job-requirements">
+          <span>Licenciatura relacionada</span>
+          <span>Pensamiento crítico</span>
+          <span>Análisis de información</span>
+          <span>Redacción técnica</span>
+        </div>
+      </div>
+
+      <div class="job-salary">
+        <small>SUELDO MENSUAL DE EJEMPLO</small>
+        <strong>$16,000</strong>
+        <a href="#contacto">VER DETALLES ↗</a>
+      </div>
+    </article>
+
+    <div class="job-note">
+      <strong>Nota:</strong> Los puestos, instituciones, ubicaciones y
+      sueldos de esta sección son ejemplos ilustrativos para el diseño
+      de NOCTURNA. No representan vacantes activas ni ofertas laborales
+      verificadas. Los requisitos reales dependen de cada institución.
+    </div>
+
+  </section>
+
+  <!-- CONTACTO -->
+
+  <section class="sales-closing" id="contacto">
+    <div class="eyebrow">NOCTURNA / SIGUIENTE ETAPA</div>
+
+    <h2>Tu futuro también se <span>construye.</span></h2>
+
+    <p>
+      Explora nuevas áreas de conocimiento, fortalece tu formación
+      y descubre las posibilidades de estas disciplinas.
+    </p>
+
+    <a href="index.html" class="back-home">
+      REGRESAR AL INICIO ↗
+    </a>
+  </section>
+
+</main>
+
+<footer class="sales-footer">
+  <span>NOCTURNA © 2026</span>
+  <span>ARCHIVO DE CIENCIA Y MISTERIO</span>
+  <span>03 / RECURSOS Y OPORTUNIDADES</span>
+</footer>
+
+<script>
+/* FILTROS DE CURSOS */
+
+const filterButtons = document.querySelectorAll(".filter-btn");
+const courseCards = document.querySelectorAll("#courseGrid .product-card");
+const courseSearch = document.getElementById("courseSearch");
+
+let currentFilter = "all";
+
+function filterCourses(){
+  const search = courseSearch.value.toLowerCase().trim();
+
+  courseCards.forEach(card => {
+    const category = card.dataset.category;
+    const text = card.textContent.toLowerCase();
+
+    const matchesFilter =
+      currentFilter === "all" || category === currentFilter;
+
+    const matchesSearch = text.includes(search);
+
+    card.style.display =
+      matchesFilter && matchesSearch ? "" : "none";
+  });
+}
+
+filterButtons.forEach(button => {
+  button.addEventListener("click", () => {
+    filterButtons.forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+    currentFilter = button.dataset.filter;
+
+    filterCourses();
+  });
+});
+
+courseSearch.addEventListener("input", filterCourses);
+</script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
