@@ -25,14 +25,155 @@ body:before{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;opa
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none;filter:none}}
 
 
-/* NOCTURNA — botón flotante de música */
-.nocturna-music{position:fixed;right:22px;bottom:22px;z-index:120;display:flex;flex-direction:column;align-items:flex-end;gap:8px;font-family:var(--sans,Arial,sans-serif)}
-.nocturna-music__player{position:absolute;width:1px;height:1px;overflow:hidden;opacity:0;pointer-events:none;right:0;bottom:0}
-.nocturna-music__player iframe{width:200px;height:200px}
-.nocturna-music__button{display:flex;align-items:center;gap:10px;padding:12px 16px;border:1px solid #ff80c5aa;border-radius:999px;background:rgba(15,7,19,.9);color:#ffe7f5;box-shadow:0 0 22px #ff5fb733,inset 0 0 15px #ff5fb70d;backdrop-filter:blur(14px);font-size:9px;font-weight:700;letter-spacing:1.3px;cursor:pointer;transition:transform .25s,border-color .25s,box-shadow .25s}
-.nocturna-music__button:hover{transform:translateY(-3px);border-color:#ffa1d5;box-shadow:0 0 28px #ff5fb766}
-.nocturna-music__icon{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#ff5fb722;color:#ffa1d5;font-size:17px}
-.nocturna-music.is-playing .nocturna-music__icon{animation:nocturna-note 1.3s ease-in-out infinite}
-.nocturna-music__caption{max-width:240px;padding:5px 9px;border-radius:7px;background:#100714cc;color:#d8b4cd;font-size:9px;letter-spacing:.6px;text-align:right}
-@keyframes nocturna-note{0%,100%{box-shadow:0 0 0 #ff5fb700;transform:scale(1)}50%{box-shadow:0 0 15px #ff5fb766;transform:scale(1.08)}}
-@media(max-width:600px){.nocturna-music{right:12px;bottom:12px}.nocturna-music__button{padding:10px 12px;font-size:8px}.nocturna-music__caption{max-width:190px;font-size:8px}}
+/* =========================================
+   NOCTURNA — BOTÓN MUSICAL FLOTANTE
+========================================= */
+.nocturna-music {
+  position: fixed;
+  right: 28px;
+  bottom: 25px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.nocturna-player-host {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: -10000px;
+  top: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nocturna-player-host iframe {
+  width: 200px;
+  height: 200px;
+  border: 0;
+}
+
+.music-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 19px;
+  border: 1px solid rgba(224, 173, 222, .55);
+  border-radius: 50px;
+  background: rgba(18, 10, 25, .94);
+  color: #f5dff5;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(191, 111, 190, .12);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.music-button:hover,
+.music-button:focus-visible {
+  transform: translateY(-3px);
+  border-color: #edb7e8;
+  box-shadow: 0 0 25px rgba(222, 151, 219, .3);
+  outline: none;
+}
+
+.music-icon {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border: 1px solid rgba(224, 173, 222, .5);
+  border-radius: 50%;
+  color: #edb7e8;
+  font-size: 18px;
+}
+
+.nocturna-music.is-playing .music-icon {
+  animation: nocturnaMusicPulse 2s ease-in-out infinite;
+}
+
+.nocturna-music.is-playing .music-button {
+  border-color: rgba(237, 183, 232, .85);
+}
+
+.music-caption {
+  padding-right: 10px;
+  color: rgba(235, 208, 235, .65);
+  font-family: "DM Sans", sans-serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+}
+
+@keyframes nocturnaMusicPulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(237, 183, 232, 0); transform: scale(1); }
+  50% { box-shadow: 0 0 15px rgba(237, 183, 232, .45); transform: scale(1.08); }
+}
+
+@media (max-width: 600px) {
+  .nocturna-music { right: 14px; bottom: 15px; }
+  .music-button { padding: 10px 13px; gap: 8px; }
+  .music-label { font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nocturna-music.is-playing .music-icon { animation: none; }
+}
+
+
+
+/* =========================================
+   NOCTURNA — VENTAS / ESPACIO ACADÉMICO
+   Extensión: conserva los estilos originales.
+========================================= */
+.sales-entry{position:relative;isolation:isolate;overflow:hidden;min-height:270px;margin:28px 7px;padding:clamp(28px,5vw,58px);display:flex;align-items:center;justify-content:space-between;gap:28px;border:1px solid #874568;background:radial-gradient(ellipse at 85% 50%,#a52e7833,transparent 38%),linear-gradient(115deg,#1b0c1d,#100812 70%);box-shadow:inset 0 0 45px #ff5fb70b}
+.sales-entry:before{content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent,#ff5fb708,transparent)}
+.sales-entry-content{max-width:650px}
+.sales-kicker{margin:0;color:#ff9fd2;font-size:8px;letter-spacing:2.5px}
+.sales-entry h2{margin:15px 0 12px;font:500 clamp(35px,5vw,58px)/1 var(--serif);color:#ffe7f4}
+.sales-entry h2 em{color:#ff9fd2}
+.sales-entry-content>p:not(.sales-kicker){max-width:520px;color:#c9afc4;font-size:11px;line-height:1.9}
+.sales-button{display:inline-flex;align-items:center;gap:22px;margin-top:12px;padding:12px 17px;border:1px solid #ff80c5a8;background:#ff5fb710;color:#ffb6dc;font-size:8px;letter-spacing:1.5px;transition:.3s}
+.sales-button:hover{transform:translateY(-4px);background:#ff5fb722;border-color:#ffa1d5;box-shadow:0 0 25px #ff5fb733}
+.sales-button span{font-size:16px}
+.sales-entry-seal{flex:0 0 140px;width:140px;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid #ff80c455;border-radius:50%;color:#ffadd8;transform:rotate(8deg);box-shadow:0 0 35px #ff5fb71b,inset 0 0 25px #ff5fb711}
+.sales-entry-seal span{font:55px/.8 var(--serif)}
+.sales-entry-seal small{text-align:center;font-size:6px;line-height:1.6;letter-spacing:1.5px}
+.sales-entry-seal b{font-size:16px;font-weight:400}
+
+.sales-hero{min-height:410px;position:relative;isolation:isolate;display:flex;align-items:center;overflow:hidden;padding:clamp(45px,8vw,90px);border-bottom:1px solid #9d426d88;background:radial-gradient(ellipse at 80% 30%,#b33c8733,transparent 40%),linear-gradient(120deg,#1b0b1d,#09050d)}
+.sales-hero:after{content:"03";position:absolute;z-index:-1;right:8%;top:50%;transform:translateY(-50%);font:300 clamp(150px,25vw,310px)/1 var(--serif);color:#ff8bc70b}
+.sales-hero-content{max-width:760px}
+.sales-eyebrow{margin:0;color:#f2b3d9;font-size:9px;letter-spacing:3px}
+.sales-hero h1{margin:20px 0;font:500 clamp(48px,7vw,88px)/.95 var(--serif);color:#ffe7f4;text-shadow:0 0 30px #ff69ba33}
+.sales-hero h1 em{color:#ff9fd2}
+.sales-hero-description{max-width:590px;color:#d5bdd0;font-size:12px;line-height:1.9}
+.sales-breadcrumb{margin-top:28px;color:#ffadd8;font-size:8px;letter-spacing:1.5px}
+.sales-breadcrumb a{color:#d8b4cd}
+.sales-catalog{padding-block:75px 90px}
+.sales-heading{max-width:650px;margin:0 auto 42px;text-align:center}
+.sales-heading .sales-eyebrow{font-size:8px}
+.sales-heading h2{margin:15px 0;font:500 clamp(38px,5vw,60px)/1 var(--serif);color:#ffe7f4}
+.sales-heading h2 em{color:#ff9fd2}
+.sales-heading>p:last-child{color:#c9afc4;font-size:11px;line-height:1.9}
+.sales-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.sales-card{min-width:0;min-height:315px;position:relative;overflow:hidden;padding:27px 23px;display:flex;flex-direction:column;align-items:flex-start;border:1px solid #63344f;background:radial-gradient(ellipse at 100% 0%,#a83d7822,transparent 45%),#150b17;transition:transform .35s,border-color .35s,box-shadow .35s}
+.sales-card:hover{transform:translateY(-7px);border-color:#ff85c5;box-shadow:0 18px 45px #0008,0 0 25px #ff5fb71a}
+.sales-card-number{color:#ff9fd2;font:italic 17px var(--serif)}
+.sales-card-icon{width:55px;height:55px;margin:27px 0 17px;display:grid;place-items:center;border:1px solid #a34b78;border-radius:50%;color:#ffadd8;font-size:23px;box-shadow:0 0 20px #ff5fb71a}
+.sales-card h3{margin:0 0 12px;color:#ffe7f4;font:500 30px/1 var(--serif)}
+.sales-card p{margin:0;color:#c9afc4;font-size:11px;line-height:1.8}
+.sales-card-link{display:inline-flex;align-items:center;gap:18px;margin-top:auto;padding-top:25px;color:#ffadd8;font-size:8px;letter-spacing:1.5px}
+.sales-card-link:hover{color:white}
+.sales-note{margin-top:35px;padding:22px;border-left:2px solid #ff8ac7;background:#ff5fb70b}
+.sales-note p{margin:0;color:#c9afc4;font-size:11px;line-height:1.9}
+.sales-back{display:inline-block;margin-top:28px;color:#ffadd8;font-size:9px;letter-spacing:1.5px}
+@media(max-width:1000px){.sales-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.sales-entry{min-height:auto;margin:18px 7px;padding:27px 20px}.sales-entry-seal{flex-basis:90px;width:90px;height:90px}.sales-entry-seal span{font-size:35px}.sales-entry-seal small{font-size:5px}.sales-entry-seal b{display:none}.sales-hero{min-height:360px;padding:38px 22px}.sales-grid{grid-template-columns:1fr}.sales-card{min-height:270px}.sales-catalog{padding-block:52px 65px}}
+@media(max-width:390px){.sales-entry{gap:12px}.sales-entry-seal{flex-basis:68px;width:68px;height:68px}.sales-entry-seal span{font-size:28px}}
+
