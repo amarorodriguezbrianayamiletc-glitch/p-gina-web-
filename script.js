@@ -124,16 +124,30 @@
 
 /* =========================================
    NOCTURNA — BOTÓN MUSICAL FLOTANTE
-   El reproductor de YouTube permanece oculto.
+   Una canción diferente por cada página.
+   Reproductor de YouTube oculto.
 ========================================= */
 
 (() => {
-  const videoMeta = document.querySelector(
-    'meta[name="nocturna-music-video"]'
-  );
 
-  const videoId =
-    (videoMeta && videoMeta.content) || "NfMegACVJQw";
+  // CANCIONES DE CADA PÁGINA
+  const songs = {
+    "index.html": "d_HlPboLRL8",
+    "criminologia.html": "V1Pl8CzNzCw",
+    "criminalistica.html": "HUHC9tYz8ik",
+    "casos-criminologia.html": "GCdwKhTtNNw",
+    "casos-criminalistica.html": "EgBJmlPo8Xw",
+    "carrera-criminologia.html": "so8V5dAli-Q",
+    "carrera-criminalistica.html": "aGCdLKXNF3w",
+    "ventas.html": "jVG_Q5pyMaM"
+  };
+
+  // Detectar automáticamente la página actual
+  const currentPage =
+    location.pathname.split('/').pop() || "index.html";
+
+  // Seleccionar la canción correspondiente
+  const videoId = songs[currentPage] || songs["index.html"];
 
   if (document.getElementById("nocturnaMusic")) return;
 
