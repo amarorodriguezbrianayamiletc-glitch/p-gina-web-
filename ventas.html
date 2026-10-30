@@ -1142,7 +1142,53 @@ footer b {
     </div>
 
 </div>
+<!-- BOTÓN DE MÚSICA -->
+<div id="youtube-player-container"
+     style="position: fixed; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;">
+    <div id="youtube-player"></div>
+</div>
 
+<button type="button" class="music-button" id="musicButton">
+    <span class="music-icon" id="musicIcon">♫</span>
+    <span id="musicText">Reproducir música</span>
+</button>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+
+<script>
+let player;
+let isPlaying = false;
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('youtube-player', {
+        height: '1',
+        width: '1',
+        videoId: 'd_HlPboLRL8',
+        playerVars: {
+            autoplay: 0,
+            controls: 0,
+            loop: 1,
+            playlist: 'd_HlPboLRL8'
+        }
+    });
+}
+
+document.getElementById('musicButton').addEventListener('click', function() {
+    if (!player || !player.playVideo) return;
+
+    if (!isPlaying) {
+        player.playVideo();
+        document.getElementById('musicIcon').textContent = 'Ⅱ';
+        document.getElementById('musicText').textContent = 'Pausar música';
+        isPlaying = true;
+    } else {
+        player.pauseVideo();
+        document.getElementById('musicIcon').textContent = '♫';
+        document.getElementById('musicText').textContent = 'Reproducir música';
+        isPlaying = false;
+    }
+});
+</script>
 <script>
 
 /* =========================
