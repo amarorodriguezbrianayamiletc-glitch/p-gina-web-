@@ -1,3 +1,4 @@
+
 (() => {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -5,7 +6,7 @@
   const nav = document.querySelector('.nav');
   const menu = document.querySelector('.menu');
 
-  // Efecto de cursor
+  // Efecto del cursor
   const glow = document.createElement('div');
   glow.className = 'cursor-glow';
   glow.setAttribute('aria-hidden', 'true');
@@ -29,7 +30,16 @@
     });
   }
 
-  // Animaciones al aparecer en pantalla
+  // Marcar enlace activo
+  const current = location.pathname.split('/').pop() || 'index.html';
+
+  document.querySelectorAll('.nav a').forEach(a => {
+    if (a.getAttribute('href') === current) {
+      a.classList.add('active');
+    }
+  });
+
+  // Animaciones al aparecer
   if ('IntersectionObserver' in window && !reduced) {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -46,7 +56,6 @@
     document.querySelectorAll('.reveal').forEach(el => {
       io.observe(el);
     });
-
   } else {
     document.querySelectorAll('.reveal').forEach(el => {
       el.classList.add('visible');
@@ -66,7 +75,7 @@
   addEventListener('scroll', update, { passive: true });
   update();
 
-  // Efecto de cursor y partículas
+  // Partículas del cursor
   if (!reduced && matchMedia('(pointer:fine)').matches) {
     let last = 0;
 
@@ -87,7 +96,6 @@
         last = performance.now();
       }
     }, { passive: true });
-
   } else {
     glow.style.display = 'none';
   }
@@ -115,11 +123,11 @@
 
 
 /* =========================================
-   NOCTURNA — REPRODUCTOR MUSICAL DE YOUTUBE
+   NOCTURNA — BOTÓN MUSICAL FLOTANTE
+   El reproductor de YouTube permanece oculto.
 ========================================= */
 
 (() => {
-
   const videoMeta = document.querySelector(
     'meta[name="nocturna-music-video"]'
   );
@@ -135,31 +143,25 @@
   musicBox.id = "nocturnaMusic";
 
   musicBox.innerHTML = `
-    <div class="nocturna-player-host"
-         id="nocturnaPlayerHost"
-         aria-hidden="true"></div>
+    <div class="nocturna-player-wrap" aria-hidden="true">
+      <div id="nocturnaPlayerHost"></div>
+    </div>
 
-    <button class="music-button"
-            id="musicToggle"
-            type="button"
-            aria-label="Reproducir música"
-            aria-pressed="false">
+    <button
+      class="music-button"
+      id="musicToggle"
+      type="button"
+      aria-label="Reproducir música"
+      aria-pressed="false">
 
-      <span class="music-icon"
-            id="musicIcon"
-            aria-hidden="true">♫</span>
-
-      <span class="music-label"
-            id="musicLabel">
-        ACTIVAR AMBIENTE
+      <span class="music-icon" id="musicIcon" aria-hidden="true">
+        ♫
       </span>
 
+      <span class="music-label" id="musicLabel">
+        REPRODUCIR MÚSICA
+      </span>
     </button>
-
-    <span class="music-caption"
-          id="musicCaption">
-      NOCTURNA · SOUNDTRACK
-    </span>
   `;
 
   document.body.appendChild(musicBox);
@@ -167,15 +169,13 @@
   const musicButton = musicBox.querySelector("#musicToggle");
   const musicIcon = musicBox.querySelector("#musicIcon");
   const musicLabel = musicBox.querySelector("#musicLabel");
-  const musicCaption = musicBox.querySelector("#musicCaption");
 
   let player = null;
   let apiReady = false;
   let isPlaying = false;
 
-  // Actualizar estado del reproductor
+  // Actualizar el botón
   function setMusicState(playing) {
-
     isPlaying = playing;
 
     musicBox.classList.toggle("is-playing", playing);
@@ -193,24 +193,17 @@
     musicIcon.textContent = playing ? "Ⅱ" : "♫";
 
     musicLabel.textContent = playing
-      ? "PAUSAR AMBIENTE"
-      : "ACTIVAR AMBIENTE";
-
-    musicCaption.textContent = playing
-      ? "NOCTURNA · REPRODUCIENDO"
-      : "NOCTURNA · SOUNDTRACK";
+      ? "PAUSAR MÚSICA"
+      : "REPRODUCIR MÚSICA";
   }
 
-  // Crear reproductor de YouTube
+  // Crear reproductor oculto
   function createPlayer() {
-
-    if (!window.YT || !window.YT.Player) return;
+    if (!window.YT || !window.YT.Player || player) return;
 
     player = new YT.Player("nocturnaPlayerHost", {
-
       width: "200",
       height: "200",
-
       videoId: videoId,
 
       playerVars: {
@@ -223,13 +216,11 @@
       },
 
       events: {
-
         onReady: () => {
           apiReady = true;
         },
 
-        onStateChange: (event) => {
-
+        onStateChange: event => {
           if (event.data === YT.PlayerState.PLAYING) {
             setMusicState(true);
           }
@@ -240,31 +231,19 @@
           ) {
             setMusicState(false);
           }
-
         },
 
         onError: () => {
-
-          musicLabel.textContent = "VIDEO NO DISPONIBLE";
-
-          musicCaption.textContent =
-            "PRUEBA OTRO VIDEO DE YOUTUBE";
-
+          musicLabel.textContent = "MÚSICA NO DISPONIBLE";
         }
-
       }
-
     });
-
   }
 
-  // Botón de música
+  // Botón reproducir / pausar
   musicButton.addEventListener("click", () => {
-
     if (!apiReady || !player) {
-
-      musicLabel.textContent = "CARGANDO MÚSICA...";
-
+      musicLabel.textContent = "CARGANDO...";
       return;
     }
 
@@ -273,44 +252,32 @@
     } else {
       player.playVideo();
     }
-
   });
 
   // Cargar API de YouTube
   if (window.YT && window.YT.Player) {
-
     createPlayer();
-
   } else {
-
-    const previousCallback =
-      window.onYouTubeIframeAPIReady;
+    const previousCallback = window.onYouTubeIframeAPIReady;
 
     window.onYouTubeIframeAPIReady = () => {
-
       if (typeof previousCallback === "function") {
         previousCallback();
       }
 
       createPlayer();
-
     };
 
-    if (
-      !document.querySelector(
-        'script[src="https://www.youtube.com/iframe_api"]'
-      )
-    ) {
-
+    if (!document.querySelector(
+      'script[src="https://www.youtube.com/iframe_api"]'
+    )) {
       const apiScript = document.createElement("script");
 
       apiScript.src =
         "https://www.youtube.com/iframe_api";
 
       document.head.appendChild(apiScript);
-
     }
-
   }
 
 })();
