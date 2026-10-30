@@ -177,3 +177,16 @@ body:before{content:"";position:fixed;inset:0;z-index:70;pointer-events:none;opa
 @media(max-width:700px){.sales-entry{min-height:auto;margin:18px 7px;padding:27px 20px}.sales-entry-seal{flex-basis:90px;width:90px;height:90px}.sales-entry-seal span{font-size:35px}.sales-entry-seal small{font-size:5px}.sales-entry-seal b{display:none}.sales-hero{min-height:360px;padding:38px 22px}.sales-grid{grid-template-columns:1fr}.sales-card{min-height:270px}.sales-catalog{padding-block:52px 65px}}
 @media(max-width:390px){.sales-entry{gap:12px}.sales-entry-seal{flex-basis:68px;width:68px;height:68px}.sales-entry-seal span{font-size:28px}}
 
+
+/* AJUSTES: tarjeta de Ventas igual a las disciplinas y centrada */
+.sales-grid-single{display:block;padding:7px;background:#07040c;border-bottom:1px solid #733451}
+.sales-grid-single .panel-sales{width:min(100%,760px);min-height:420px;margin:0 auto}
+.panel-sales .panel-bg{background-image:linear-gradient(90deg,#0b050bd9,#16081775 70%,#09050c88),radial-gradient(ellipse at 75% 35%,#b83b8066,transparent 55%),linear-gradient(135deg,#241027,#100812)}
+.panel-sales:hover .panel-bg{filter:saturate(1.15)}
+@media(max-width:700px){.sales-grid-single{padding:7px}.sales-grid-single .panel-sales{width:100%;min-height:370px;margin:0}}
+
+/* El reproductor de YouTube queda completamente fuera de pantalla.
+   Solo se muestra el botón musical flotante. */
+.nocturna-player-wrap{position:fixed!important;left:-10000px!important;top:-10000px!important;width:200px!important;height:200px!important;overflow:hidden!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;z-index:-1!important}
+.nocturna-player-wrap iframe{position:absolute!important;left:0!important;top:0!important;width:200px!important;height:200px!important;border:0!important;visibility:hidden!important;pointer-events:none!important}
+.music-caption{display:none!important}
